@@ -18,12 +18,12 @@ class Queue {
   }
 
   getUnderlyingList() {
-    return this.head;
+    return !this.head ? null : { ...this.head };
   }
 
   enqueue(value) {
     if (!this.head) {
-      this.head = new ListNode(value);
+      this.head = { ...new ListNode(value) };
     }
     else {
       let current = this.head;
@@ -31,8 +31,7 @@ class Queue {
       while (current.next) {
         current = current.next
       }
-
-      current.next = new ListNode(value)
+      current.next = { ...new ListNode(value) }
     }
   }
 
@@ -44,11 +43,17 @@ class Queue {
       return current.value
     }
     else {
-      return null
+      return
     }
   }
 }
+const queue = new Queue();
 
+queue.enqueue(1); // adds the element to the queue
+queue.enqueue(3); // adds the element to the queue
+queue.dequeue(); // returns the top element from queue and deletes it, returns 1
+; // returns { value: 3, next: null }
+console.log(queue.getUnderlyingList())
 module.exports = {
   Queue
 };
